@@ -42,8 +42,8 @@
               Products
             </a>
             <a
-              href="#"
-              class="list-group-item list-group-item-action"
+              href="{{ route('category.index') }}"
+              class="list-group-item list-group-item-action {{ (request()->is('admin/category*')) ? 'active' : ''  }}"
             >
               Categories
             </a>
@@ -138,7 +138,8 @@
     @stack('prepend-script')
     <script src="/vendor/jquery/jquery.min.js"></script>
     <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.11.3/datatables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap4.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
       AOS.init();
