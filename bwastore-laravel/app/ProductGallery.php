@@ -7,5 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class ProductGallery extends Model
 {
-    use HasFactory;
+    protected $fillable = ["photos", "products_id"];
+
+    protected $hidden = [];
+
+    public function product()
+    {
+        return $this->belongsTo(Product::class, "products_id", "id");
+        // jika ingin hapus tapi ingin tetap bisa mengambil data maka ditambahin aja ->withTrashed() sebelum ;
+    }
 }
