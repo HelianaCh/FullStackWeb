@@ -18,7 +18,7 @@
               <nav>
                 <ol class="breadcrumb">
                   <li class="breadcrumb-item">
-                    <a href="/index.html" class="">Home</a>
+                    <a href="{{ route('home') }}" class="">Home</a>
                   </li>
                   <li class="breadcrumb-item active">Cart</li>
                 </ol>

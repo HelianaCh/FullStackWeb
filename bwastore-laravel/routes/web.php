@@ -36,6 +36,11 @@ Route::get("/details/{id}", [
     "index",
 ])->name("detail");
 
+Route::post("/details/{id}", [
+    App\Http\Controllers\DetailController::class,
+    "add",
+])->name("detail-add");
+
 Route::get("/cart", [
     App\Http\Controllers\CartController::class,
     "index",
