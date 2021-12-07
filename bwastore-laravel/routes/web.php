@@ -46,6 +46,11 @@ Route::get("/cart", [
     "index",
 ])->name("cart");
 
+Route::delete("/cart/{id}", [
+    App\Http\Controllers\CartController::class,
+    "delete",
+])->name("cart-delete");
+
 Route::get("/success", [
     App\Http\Controllers\CartController::class,
     "success",

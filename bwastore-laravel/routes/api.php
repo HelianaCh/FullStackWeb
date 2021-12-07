@@ -22,3 +22,13 @@ Route::get("register/check", [
     App\Http\Controllers\Auth\RegisterController::class,
     "check",
 ])->name("api-register-check");
+
+Route::get("provinces", [
+    App\Http\Controllers\API\LocationController::class,
+    "provinces",
+])->name("api-provinces");
+
+Route::get("regencies/{provinces_id}", [
+    App\Http\Controllers\API\LocationController::class,
+    "regencies",
+])->name("api-regencies");
