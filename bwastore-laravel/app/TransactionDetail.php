@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Transaction extends Model
+class TransactionDetail extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -13,11 +13,11 @@ class Transaction extends Model
      * @var string[]
      */
     protected $fillable = [
-        "users_id",
-        "inscurance_price",
-        "shipping_price",
-        "total_price",
-        "transaction_status",
+        "transactions_id",
+        "products_id",
+        "price",
+        "shipping_status",
+        "resi",
         "code",
     ];
 

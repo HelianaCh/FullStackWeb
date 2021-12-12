@@ -17,6 +17,7 @@
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.3",
+        "midtrans/midtrans-php": "^2.5",
         "sentry/sentry-laravel": "^2.9",
         "yajra/laravel-datatables-oracle": "~9.0"
     },
