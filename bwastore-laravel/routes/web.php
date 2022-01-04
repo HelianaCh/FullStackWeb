@@ -124,6 +124,11 @@ Route::group(["middleware" => ["auth"]], function () {
         "details",
     ])->name("dashboard-transaction-details");
 
+    Route::post("/dashboard/transactions/{id}", [
+        App\Http\Controllers\DashboardTransactionController::class,
+        "update",
+    ])->name("dashboard-transaction-update");
+
     Route::get("/dashboard/settings", [
         App\Http\Controllers\DashboardSettingController::class,
         "store",
@@ -151,6 +156,7 @@ Route::prefix("admin")
         Route::resource("user", UserController::class);
         Route::resource("product", ProductController::class);
         Route::resource("product-gallery", ProductGalleryController::class);
+        Route::resource("transaction", "TransactionController");
     });
 
 Auth::routes();
