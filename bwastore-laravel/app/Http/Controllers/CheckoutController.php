@@ -11,6 +11,7 @@ use App\TransactionDetail;
 use Exception;
 use Midtrans\Snap;
 use Midtrans\config;
+use Midtrans\Notification;
 
 class CheckoutController extends Controller
 {
@@ -88,5 +89,46 @@ class CheckoutController extends Controller
 
     public function callback(Request $request)
     {
+        // Set konfigurasi midtrans
+        Config::$serverKey = config("services.midtrans.serverKey");
+        Config::$serverKey = config("services.midtrans.isProduction");
+        Config::$serverKey = config("services.midtrans.isSanitized");
+        Config::$serverKey = config("services.midtrans.is3ds");
+
+        // instance midtrans notification
+        $notification = new Notification();
+
+        // Assign ke variabel untuk memudahkan coding
+        $status = $notification->transaction_status;
+        $type = $notification->payment_type;
+        $fraud = $notification->fraud_status;
+        $order_id = $notification->order_id;
+
+        // Cari transaksi berdasarkan id
+        $transaction = Transaction::findOrdFail($order_id);
+
+        // Handle notification status
+        if ($status == "capture") {
+            if ($type == "credit_card") {
+                if ($fraud == "challenge") {
+                    $transaction->status = "PENDING";
+                } else {
+                    $transaction->status = "SUCCESS";
+                }
+            }
+        } elseif ($status == "settlement") {
+            $transaction->status = "SUCCESS";
+        } elseif ($status == "pending") {
+            $transaction->status = "PENDING";
+        } elseif ($status == "deny") {
+            $transaction->status = "CANCELLED";
+        } elseif ($status == "expire") {
+            $transaction->status = "CANCELLED";
+        } elseif ($status == "cancel") {
+            $transaction->status = "CANCELLED";
+        }
+
+        // Simpan transaksi
+        $transaction->save();
     }
 }
